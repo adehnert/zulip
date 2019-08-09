@@ -309,7 +309,9 @@ class EventQueue:
 
     # See the comment on pop; that applies here as well
     def prune(self, through_id: int) -> None:
+        logging.info("Pruning")
         while len(self.queue) != 0 and self.queue[0]['id'] <= through_id:
+            logging.info("%s %s %s %s/%s" % (self.id, self.next_event_id, self.newest_pruned_id, self.queue[0]['id'], through_id))
             self.newest_pruned_id = self.queue[0]['id']
             self.pop()
 
